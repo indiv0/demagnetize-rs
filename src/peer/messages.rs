@@ -672,7 +672,7 @@ impl From<MetadataMessage> for Bytes {
     fn from(msg: MetadataMessage) -> Bytes {
         let mut encoder = Encoder::new().with_max_depth(3);
         encoder
-            .emit_dict(|mut e| {
+            .emit_and_sort_dict(|e| {
                 match msg {
                     MetadataMessage::Request { piece } => {
                         e.emit_pair(b"msg_type", 0)?;
